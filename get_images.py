@@ -1,5 +1,5 @@
 from __future__ import with_statement
-import urllib2, os, cStringIO
+import urllib, os, time
 from bs4 import BeautifulSoup
 from collections import defaultdict
 
@@ -17,23 +17,25 @@ def mk_file_if_ne (fname):
     if not os.path.exists(fname):
         os.makedirs(fname)
 
-if __name__ == '__main__':
-    # make data dirs if needed
+def setup_env ():
+    """Creates all dirs if needed"""
     mk_file_if_ne(DATA_DIR)
     mk_file_if_ne(IMG_DIR)
 
-    # get data
+def get_data ():
+    """Gets all raw data as text"""
     with open(DATA) as f:
         raw = f.read()
+    return raw
 
-    # get all pics and votings
+def iter_thru_valid_divs (raw):
+    """Iterates through parsed HTML and yields: (1) the URL at which a text can
+    be found, and (2) the dictionary representing the user votes"""
     soup = BeautifulSoup(raw)
     for div in soup.findAll('div', {'class': 'post-content'}):
         img_src = None
-        print "COW"
         for match in div.findAll('div', {'class': 'field-text-image'}):
             img_src = match.img['src']
-            print img_src
             break
 
         countmap = defaultdict(lambda: 0)
@@ -42,8 +44,19 @@ if __name__ == '__main__':
                 count_type = li.a.text
                 count = int(li.text.replace(li.a.text, ""))
                 countmap[verdict_map[count_type]] = count
-                print count
-        print countmap
 
         if img_src != None:
-            break
+            yield img_src, countmap
+
+if __name__ == '__main__':
+    # make data dirs if needed
+    setup_env()
+    raw = get_data()
+
+    for i,(url,result) in enumerate(iter_thru_valid_divs(raw)):
+        print 'processing file %d' % i
+        filename = "%stxt%d.jpg" % (IMG_DIR, i)
+        
+        with open(filename, 'wb') as w:
+            w.write(urllib.urlopen(url).read())
+            time.sleep(0.5)
