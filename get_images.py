@@ -7,7 +7,8 @@ from collections import defaultdict
 # constant directories and files
 DATA_DIR = 'data/'
 IMG_DIR = 'data/images/'
-DATA = 'data/testdata'
+DATA = 'data/data'
+DATA_LABELS = 'data/labels'
 
 # constant outcome types that HeTexted.com presents us with
 INTO_YOU = 'into you'
@@ -55,15 +56,24 @@ def iter_thru_valid_divs (raw):
         if img_src != None:
             yield img_src, countmap
 
-
-if __name__ == '__main__':
+def setup_data ():
     setup_env()
     raw = get_data()
 
-    for i,(url,result) in enumerate(iter_thru_valid_divs(raw)):
-        print 'processing file %d' % i
-        filename = "%stxt_msg%d.jpg" % (IMG_DIR, i)
-        
-        with open(filename, 'wb') as w:
-            w.write(urllib.urlopen(url).read())
-            time.sleep(0.5)
+    with open(DATA_LABELS, 'wb') as labelswriter:
+        labelswriter.write("id\tinto you\tnot into you\tverdict still out\n")
+        for i,(url,labels) in enumerate(iter_thru_valid_divs(raw)):
+            print 'processing file %d' % i
+            filename = "%stxt_msg%d.jpg" % (IMG_DIR, i)
+
+            with open(filename, 'wb') as w:
+                w.write(urllib.urlopen(url).read())
+                time.sleep(0.25)
+                labelswriter.write("%d\t%d\t%d\t%d\n" %
+                                   (i, labels[INTO_YOU],
+                                    labels[NOT_INTO_YOU],
+                                    labels[VERDICT_STILL_OUT]))
+
+
+if __name__ == '__main__':
+    setup_data()
