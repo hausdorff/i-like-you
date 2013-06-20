@@ -78,8 +78,13 @@ def setup_data ():
         filename = "%stxt_msg%d.jpg" % (IMG_DIR, i)
 
         with open(filename, 'wb') as w:
-            w.write(urllib.urlopen(url).read())
-            time.sleep(0.25)
+            try:
+                dta = urllib.urlopen(url).read()
+            except Exception as err:
+                print err
+                continue
+            w.write(dta)
+            #time.sleep(0.25)
             labels_file_lines.append("%d\t%d\t%d\t%d\n" %
                                      (i, labels[INTO_YOU],
                                       labels[NOT_INTO_YOU],
