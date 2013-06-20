@@ -57,7 +57,6 @@ def iter_thru_valid_divs (raw):
 
 
 if __name__ == '__main__':
-    # make data dirs if needed
     setup_env()
     raw = get_data()
 
