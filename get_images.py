@@ -1,3 +1,9 @@
+"""get-data.js results in a potentially very long HTML document rendered in a
+browser as the main page of HeTexted.com. This contains `img` tags that link
+to the actual texts of the people. This script grabs those texts, as well as the
+votes from users on each text regarding whether the text indicates the boy likes
+the person who received the text."""
+
 from __future__ import with_statement
 import urllib, os, time, random
 from bs4 import BeautifulSoup
