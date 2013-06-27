@@ -4,7 +4,7 @@ import os
 # constant directories and files
 DATA_DIR = 'data/'
 IMG_DIR = 'data/images/'
-TXT_DIR = 'data/images/'
+TXT_DIR = 'data/texts/'
 DATA = 'data/data'
 DATA_LABELS = 'data/labels'
 
