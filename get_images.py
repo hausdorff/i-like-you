@@ -7,23 +7,17 @@ votes from users on each text regarding whether the text indicates the boy likes
 the person who received the text."""
 
 from __future__ import with_statement
-import urllib, os, time, random
+import urllib, time, random
 from bs4 import BeautifulSoup
 from collections import defaultdict
 
 from common import *
 
 
-
-def mk_file_if_ne (fname):
-    """Makes file if does not exist"""
-    if not os.path.exists(fname):
-        os.makedirs(fname)
-
 def setup_env ():
     """Creates all dirs if needed"""
-    mk_file_if_ne(DATA_DIR)
-    mk_file_if_ne(IMG_DIR)
+    mk_folder_if_ne(DATA_DIR)
+    mk_folder_if_ne(IMG_DIR)
 
 def get_data ():
     """Gets all raw data as text"""
