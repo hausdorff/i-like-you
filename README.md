@@ -1,6 +1,6 @@
 # i like you
 
-[hetexted.com](www.hetexted.com) is a website where confused twentysomethings send in text messages they've received from boys, and the users of the website vote on whether the boy likes them.
+[hetexted.com](http://www.hetexted.com) is a website where confused twentysomethings send in text messages they've received from boys, and the users of the website vote on whether the boy likes them.
 
 To me this was begging to be turned into a machine learning classifier.
 
