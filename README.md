@@ -13,7 +13,8 @@ The pipeline is fragile. I'm putting it online basically to document it.
 
 # Dependencies
 
-* `tesseract`, `pytesser`, and `opencv` are required for `get_data.py`
+* Beautiful Soup is required for `get_data.py`
+* `tesseract`, `pytesser`, and `opencv` are required for `proc_images.py`
 
 #LICENSE
 
