@@ -54,7 +54,7 @@ def iter_thru_valid_divs (raw):
 def cv_line_nums (li):
     """Generates cross validation sets"""
     random.shuffle(li)
-    perc = int(0.1*len(li))
+    perc = int(1.0/CV_SEGMENTS*len(li))
     for i in xrange(0, len(li), perc):
         yield li[i:i+perc], li[0:i] + li[i+perc:]
 

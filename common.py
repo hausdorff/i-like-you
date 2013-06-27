@@ -7,6 +7,8 @@ DATA_LABELS = 'data/labels'
 IMG_FILE_PATTERN = IMG_DIR + "txt_msg%d.jpg"
 DATA_FILE_PATTERN = DATA_LABELS + "_%s_%d.txt"
 
+CV_SEGMENTS = 10
+
 def img_filename (ident):
     """Takes image id and outputs filename"""
     return IMG_FILE_PATTERN % ident
