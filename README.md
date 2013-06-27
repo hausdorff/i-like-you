@@ -2,9 +2,7 @@
 
 [hetexted.com](http://www.hetexted.com) is a website where confused twentysomethings send in text messages they've received from boys, and the users of the website vote on whether the boy likes them.
 
-To me this was begging to be turned into a machine learning classifier.
-
-In this project, I:
+To me this was begging to be turned into a machine learning classifier. Hence, I:
 
 1. scraped all of the lazy-loading front page using the JavaScript commands in `get-data.js`
 2. lifted all the images out of the resulting HTML using `get_data.py`
