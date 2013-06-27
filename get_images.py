@@ -60,7 +60,7 @@ def cv_line_nums (li):
 
 def write_data (lines, ident, datatype):
     """Writes our training/test/dev data to file"""
-    with open("%s_%s_%d.txt"% (DATA_LABELS, datatype, ident), 'wb') as w:
+    with open(data_filename(datatype, ident), 'wb') as w:
         w.write("id\tinto you\tnot into you\tverdict still out\n")
         for line in lines:
             w.write(line)
@@ -75,7 +75,8 @@ def setup_data ():
     labels_file_lines = []
     for i,(url,labels) in enumerate(iter_thru_valid_divs(raw)):
         print 'processing file %d' % i
-        filename = "%stxt_msg%d.jpg" % (IMG_DIR, i)
+        #filename = "%stxt_msg%d.jpg" % (IMG_DIR, i)
+        filename = img_filename(i)
 
         with open(filename, 'wb') as w:
             try:
