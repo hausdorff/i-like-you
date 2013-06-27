@@ -1,1 +1,6 @@
 data/
+
+# Ignore the PyTesser files I put in the dir to make the project work
+errors.py
+util.py
+pytesser*
