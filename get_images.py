@@ -1,4 +1,6 @@
-"""get-data.js results in a potentially very long HTML document rendered in a
+"""quick and dirty.
+
+get-data.js results in a potentially very long HTML document rendered in a
 browser as the main page of HeTexted.com. This contains `img` tags that link
 to the actual texts of the people. This script grabs those texts, as well as the
 votes from users on each text regarding whether the text indicates the boy likes
@@ -14,6 +16,7 @@ from common import *
 
 
 def mk_file_if_ne (fname):
+    """Makes file if does not exist"""
     if not os.path.exists(fname):
         os.makedirs(fname)
 
@@ -49,18 +52,23 @@ def iter_thru_valid_divs (raw):
             yield img_src, countmap
 
 def cv_line_nums (li):
+    """Generates cross validation sets"""
     random.shuffle(li)
     perc = int(0.1*len(li))
     for i in xrange(0, len(li), perc):
         yield li[i:i+perc], li[0:i] + li[i+perc:]
 
 def write_data (lines, ident, datatype):
+    """Writes our training/test/dev data to file"""
     with open("%s_%s_%d.txt"% (DATA_LABELS, datatype, ident), 'wb') as w:
         w.write("id\tinto you\tnot into you\tverdict still out\n")
         for line in lines:
             w.write(line)
 
 def setup_data ():
+    """Looks through HTML source for labels and URLs to images of text
+    messages; then goes out and gets all the images; then writes all our
+    data files."""
     setup_env()
     raw = get_data()
 
